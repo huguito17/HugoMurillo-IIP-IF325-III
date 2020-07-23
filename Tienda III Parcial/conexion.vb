@@ -133,5 +133,23 @@ Public Class conexion
     End Function
 
 
-
+    Public Function validarUsuario(userName As String, psw As String)
+        Try
+            conexion.Open()
+            cmb = New SqlCommand("validarUsuario", conexion)
+            cmb.CommandText = CommandType.StoredProcedure
+            cmb.Parameters.AddWithValue("@userName", userName)
+            cmb.Parameters.AddWithValue("@psw", psw)
+            If cmb.ExecuteNonQuery <> 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            conexion.Close()
+        End Try
+    End Function
 End Class

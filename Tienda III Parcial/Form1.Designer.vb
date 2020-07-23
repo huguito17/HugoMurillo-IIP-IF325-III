@@ -22,6 +22,7 @@ Partial Class frmUsuario
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.cmbRol = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -46,9 +47,12 @@ Partial Class frmUsuario
         Me.txtbuscar = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnBuscar = New System.Windows.Forms.Button()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.ErrorValidacion = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.GroupBox1.SuspendLayout()
         CType(Me.TABLA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
+        CType(Me.ErrorValidacion, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -94,6 +98,7 @@ Partial Class frmUsuario
         '
         'txtCorreo
         '
+        Me.txtCorreo.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower
         Me.txtCorreo.Location = New System.Drawing.Point(97, 181)
         Me.txtCorreo.Name = "txtCorreo"
         Me.txtCorreo.Size = New System.Drawing.Size(155, 20)
@@ -217,7 +222,7 @@ Partial Class frmUsuario
         '
         'btnEliminar
         '
-        Me.btnEliminar.Location = New System.Drawing.Point(12, 305)
+        Me.btnEliminar.Location = New System.Drawing.Point(12, 308)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(87, 27)
         Me.btnEliminar.TabIndex = 4
@@ -227,9 +232,9 @@ Partial Class frmUsuario
         'TABLA
         '
         Me.TABLA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.TABLA.Location = New System.Drawing.Point(316, 81)
+        Me.TABLA.Location = New System.Drawing.Point(316, 71)
         Me.TABLA.Name = "TABLA"
-        Me.TABLA.Size = New System.Drawing.Size(489, 174)
+        Me.TABLA.Size = New System.Drawing.Size(489, 184)
         Me.TABLA.TabIndex = 5
         '
         'btnModificar
@@ -252,12 +257,12 @@ Partial Class frmUsuario
         '
         Me.GroupBox2.Controls.Add(Me.btnBuscar)
         Me.GroupBox2.Controls.Add(Me.txtbuscar)
-        Me.GroupBox2.Location = New System.Drawing.Point(480, 22)
+        Me.GroupBox2.Location = New System.Drawing.Point(476, 12)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(209, 53)
         Me.GroupBox2.TabIndex = 8
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "GroupBox2"
+        Me.GroupBox2.Text = "Busqueda por User Name"
         '
         'btnBuscar
         '
@@ -268,11 +273,25 @@ Partial Class frmUsuario
         Me.btnBuscar.Text = "Buscar"
         Me.btnBuscar.UseVisualStyleBackColor = True
         '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(313, 282)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(149, 13)
+        Me.Label8.TabIndex = 9
+        Me.Label8.Text = "Modificar UserName y nombre"
+        '
+        'ErrorValidacion
+        '
+        Me.ErrorValidacion.ContainerControl = Me
+        '
         'frmUsuario
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(817, 344)
+        Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.btnModificar)
         Me.Controls.Add(Me.TABLA)
@@ -289,7 +308,9 @@ Partial Class frmUsuario
         CType(Me.TABLA, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        CType(Me.ErrorValidacion, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -317,4 +338,6 @@ Partial Class frmUsuario
     Friend WithEvents txtbuscar As TextBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents btnBuscar As Button
+    Friend WithEvents Label8 As Label
+    Friend WithEvents ErrorValidacion As ErrorProvider
 End Class
