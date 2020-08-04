@@ -65,3 +65,47 @@ as
 select CONCAT(nombre,' ',apellido) as 'Nombre Completo',nombreUsuario as 'Usuario',rol as 'Rol',estado as 'Estado',correo as 'Correo'
 From usuario
 where nombreUsuario like '%' +@UserName+ '%'
+
+----------------PRODUCTO------------------
+	------PRODUCTOS
+Create table producto (
+	idProducto int primary key not null,
+	nombre varchar(50) null,
+	stock int null,
+	precioCompra numeric(15,2) null,
+	precioVenta numeric(15,2) null,
+	fechaVencimiento varchar(50) null,
+	stockMinimo int null,
+	impuesto numeric(10,2)
+)
+--Insertar/Guardar
+create procedure insertarProducto
+	@idProducto int, @nombre varchar(50), @stock int,
+	@precioCompra numeric(15,2), @precioVenta numeric(15,2),
+	@fechaVencimiento varchar(50),
+	@stockMinimo int, @impuesto numeric(10,2)
+	as begin
+	if exists(select nombre, idProducto from producto where nombre = @nombre or idProducto = @idProducto)
+		raiserror('Ya existe un producto con este Codigo/Nombre, por favor ingrese uno nuevo',16,1)
+	else
+	begin
+		insert into producto values(@idProducto, @nombre,@stock,@precioCompra,
+								@precioVenta,@fechaVencimiento,@stockMinimo,@impuesto)
+	end
+end
+
+select * from producto
+
+execute insertarProducto 1,'Pepsi',200,10.2,15,'20/09/2020',50,0.15
+
+alter procedure buscarProducto
+@idProducto as int
+as begin
+	select idProducto as 'Código', nombre as 'Nombre', stock as 'Cant. Disponible',
+	precioCompra as 'Costo', precioVenta as 'Precio de Venta', fechaVencimiento as 'Fecha Venc.',
+	stockMinimo as 'Stock minimo', impuesto as 'Impto' from producto where idProducto like @idProducto
+end
+execute buscarProducto 1
+
+delete from producto where idProducto = 0
+

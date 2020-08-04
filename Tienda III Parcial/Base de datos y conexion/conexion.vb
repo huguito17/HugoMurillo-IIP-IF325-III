@@ -155,4 +155,45 @@ Public Class conexion
             conexion.Close()
         End Try
     End Function
+
+    Public Function consultarPSW(correo As String)
+        Try
+            conexion.Open()
+            cmb = New SqlCommand("buscarUsuarioPorCorreo", conexion)
+            cmb.CommandType = CommandType.StoredProcedure
+            cmb.Parameters.AddWithValue("@correo", correo)
+            If cmb.ExecuteNonQuery <> 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            conexion.Close()
+        End Try
+    End Function
+
+    Public Function consultarProducto(idCodigo As Integer) As DataTable
+        Try
+            conexion.Open()
+            Dim cmb As New SqlCommand("buscarProducto", conexion)
+            cmb.CommandType = CommandType.StoredProcedure
+            cmb.Parameters.AddWithValue("@idProducto", idCodigo)
+            If cmb.ExecuteNonQuery <> 0 Then
+                Dim dt As New DataTable
+                Dim da As New SqlDataAdapter(cmb)
+                da.Fill(dt)
+                Return dt
+            Else
+                Return Nothing
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return Nothing
+        Finally
+            conexion.Close()
+        End Try
+    End Function
 End Class
