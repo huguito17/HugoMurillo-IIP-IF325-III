@@ -129,6 +129,9 @@ Public Class conexion
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
+            Return False
+        Finally
+            conexion.Close()
         End Try
     End Function
 

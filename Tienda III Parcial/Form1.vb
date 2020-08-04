@@ -8,6 +8,8 @@ Public Class frmUsuario
     Private Sub frmUsuario_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         conexion.conectar()
         Llenar()
+        btnEliminar.Enabled = False
+        btnModificar.Enabled = False
     End Sub
 
     'username@midominio.com
@@ -109,6 +111,7 @@ Public Class frmUsuario
                 'conexion.conexion.Close()
                 Llenar()
                 limpiar()
+                btnEliminar.Enabled = False
             Else
                 MsgBox("Error al dar de baja usuario")
                 'conexion.conexion.Close()
@@ -133,6 +136,7 @@ Public Class frmUsuario
                 MessageBox.Show("Modificado Exitosamente", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Llenar()
                 limpiar()
+                btnModificar.Enabled = False
                 conexion.conexion.Close()
             Else
                 MessageBox.Show("Error al modificar", "Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -152,6 +156,8 @@ Public Class frmUsuario
 
     Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
         limpiar()
+        btnEliminar.Enabled = False
+        btnModificar.Enabled = False
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
@@ -168,6 +174,8 @@ Public Class frmUsuario
         txtPsw.Text = TABLA.Rows(FilaActual).Cells(4).Value
         cmbRol.Text = TABLA.Rows(FilaActual).Cells(5).Value
         txtCorreo.Text = TABLA.Rows(FilaActual).Cells(7).Value
+        btnEliminar.Enabled = True
+        btnModificar.Enabled = True
     End Sub
 
     Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
